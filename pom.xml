@@ -29,52 +29,38 @@
                 <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
             <!--</plugin>-->
             <plugin>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.9</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>1.4.2.RELEASE</version>
+                <configuration>
+                    <fork>true</fork>
+                    <mainClass>com.microservice.example.application.Application</mainClass>
+                </configuration>
                 <executions>
                     <execution>
-                        <phase>prepare-package</phase>
                         <goals>
-                            <goal>copy-dependencies</goal>
+                            <goal>repackage</goal>
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <useBaseVersion>false</useBaseVersion>
-                    <overWriteReleases>false</overWriteReleases>
-                    <overWriteSnapshots>true</overWriteSnapshots>
-                    <includeScope>runtime</includeScope>
-                    <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                </configuration>
             </plugin>
+
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>0.4.11</version>
+                <version>0.4.13</version>
                 <configuration>
-                    <imageName>docker-movies</imageName>
-                    <dockerDirectory>src/main/docker</dockerDirectory>
-                    <!--<entryPoint>["java", "-jar", "/microservices-example-1.0-SNAPSHOT.jar com.microservice.example.application.Application"]</entryPoint>-->
+                    <imageName>movies</imageName>
+                    <baseImage>java</baseImage>
+                    <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
+                    <!-- copy the service's jar file from target into the root directory of the image -->
                     <resources>
                         <resource>
                             <targetPath>/</targetPath>
                             <directory>${project.build.directory}</directory>
-                            <include>microservices-example-1.0-SNAPSHOT.jar</include>
-                        </resource>
-                        <resource>
-                            <targetPath>/</targetPath>
-                            <directory>${project.build.directory}/lib</directory>
-                            <include>*</include>
+                            <include>${project.build.finalName}.jar</include>
                         </resource>
                     </resources>
-                    <forceTags>
-                        true
-                    </forceTags>
-                    <imageTags>
-                        <imageTag>
-                            latest
-                        </imageTag>
-                    </imageTags>
                 </configuration>
             </plugin>
 
