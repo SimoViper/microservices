@@ -1,6 +1,9 @@
 package com.microservice.example.service;
 
+import com.microservice.example.dto.FilmDetails;
+import com.microservice.example.model.Film;
+
 public interface MovieService {
 
-    String getMovieTitleById(Long movieId);
+    FilmDetails getMoviebyTitle(String  movieTitle);
 }
