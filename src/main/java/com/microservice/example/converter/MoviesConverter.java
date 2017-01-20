@@ -8,6 +8,7 @@ import com.microservice.example.model.Film;
 public class MoviesConverter {
 
     public static FilmDetails convertFilmToFilmDetails(Film film){
+
         FilmDetails fd = new FilmDetails();
         fd.setFilmId(film.getFilmId());
         fd.setTitle(film.getTitle());

@@ -4,8 +4,6 @@ import com.microservice.example.converter.MoviesConverter;
 import com.microservice.example.dto.FilmDetails;
 import com.microservice.example.model.Film;
 import com.microservice.example.repository.FilmRepository;
-import ma.glasnost.orika.MapperFactory;
-import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

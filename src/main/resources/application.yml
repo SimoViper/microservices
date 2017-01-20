@@ -10,3 +10,7 @@ spring:
   jpa:
     show-sql: true
 
+application:
+  title: Puzzled Pig Movies
+  version: v1.1.0
+
